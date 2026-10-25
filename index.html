@@ -207,11 +207,11 @@ p.lede{font-size:clamp(1.05rem,1.6vw,1.3rem);max-width:56ch;opacity:.92}
 .lang button[aria-pressed="true"]{background:var(--foam);color:var(--ink)}
 
 /* text transitions: everything fades and rises in as it scrolls into view */
-.tx{opacity:0;translate:0 22px;filter:blur(5px)}
+.tx{opacity:0;translate:0 22px;filter:blur(6px)}
 .tb{opacity:0;translate:0 28px}
 .tx.in{animation:txIn .9s var(--ease) var(--td,0s) both}
 .tb.in{animation:tbIn .95s var(--ease) var(--td,0s) both}
-@keyframes txIn{from{opacity:0;translate:0 22px;filter:blur(5px)}to{opacity:var(--o,1);translate:0 0;filter:blur(0)}}
+@keyframes txIn{from{opacity:0;translate:0 22px;filter:blur(6px)}to{opacity:var(--o,1);translate:0 0;filter:blur(0)}}
 @keyframes tbIn{from{opacity:0;translate:0 28px}to{opacity:var(--o,1);translate:0 0}}
 
 /* how it works */
@@ -377,6 +377,80 @@ footer{padding:26px;text-align:center;font-size:.82rem;opacity:.7;background:#04
   .proposal-content{align-items:flex-start}
   .proposal-preview iframe{height:420px}
 }
+
+/* Requested additions: preserve the existing palette and card styling. */
+body{overflow-x:clip}
+.stack-grid,.feas-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:32px}
+.stack-card{display:flex;gap:16px;padding:22px;border-radius:24px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16)}
+.stack-card>div{min-width:0}.stack-num{flex:none;color:var(--sun);font:800 1.4rem var(--display)}
+.stack-card h3{font-size:1.16rem}.stack-card p{font-size:.9rem;margin-top:8px}.stack-tools{color:var(--sky);font-weight:500;overflow-wrap:anywhere}
+.stack-grid>*,.feas-grid>*{min-width:0}.feas-grid .gap-card{padding:26px}
+/* Smiley's staggered blur-and-rise entrance, including cards. */
+.tb{filter:blur(6px)}
+@keyframes tbIn{from{opacity:0;translate:0 28px;filter:blur(6px)}to{opacity:var(--o,1);translate:0 0;filter:blur(0)}}
+
+@media(max-width:600px){
+ .stack-grid,.feas-grid{grid-template-columns:minmax(0,1fr)}
+ section,header.hero{padding-inline:20px}.brand-mark{left:14px;top:14px;width:38px;height:38px}
+ .wrap,.wrap *{min-width:0}.btn{padding:12px 18px;font-size:.9rem}.cta-row{gap:10px}
+ .switch button{padding:10px 17px}.switch{max-width:100%}.mini-switch{flex-wrap:wrap;justify-content:center}
+ .sl label{gap:12px}.sl label span:last-child{flex-shrink:0}.coach{padding:14px;gap:10px}
+ .sticker{gap:8px;padding:10px}.sticker .qr{width:74px}.sample{padding-inline:10px}
+ .report{padding:22px}.report .top{gap:12px}.report .top img{width:66px}.verdict{font-size:1.6rem}
+ .feat-tabs button{overflow-wrap:anywhere}.proposal-text{min-width:0;flex-basis:100%}
+ .lang button{min-height:36px}.picker button{min-height:44px}.types{flex-wrap:wrap}
+ .obj{padding:16px 14px;gap:10px}.obj .k{width:28px}.gap-card,.stat{padding:24px}
+ .video-box{min-height:0;aspect-ratio:16/9}.btn,.q-row button,.moods button{overflow-wrap:anywhere}
+}
+@media print{.tx,.tb{opacity:1;filter:none;translate:none}}
+
+
+
+/* Consistent section palettes and restrained background detail. */
+.bg-hero,.bg-navy,.bg-blue,.bg-end{--halo:rgba(124,199,255,.30);--wave-color:#91d2ff;--section-accent:#a8dcff}
+.bg-red,.bg-wine{--halo:rgba(255,157,166,.27);--wave-color:#ffb5bd;--section-accent:#ffd1d6}
+.bg-foam,.bg-peach{--halo:rgba(255,190,167,.25);--wave-color:#db9275;--section-accent:#984a34}
+.bg-wine{background:linear-gradient(145deg,#400d1a 0%,#781f31 50%,#a73544 100%)}
+section>.glow,header.hero>.glow{background:var(--halo)!important}
+.hero-art .ring{background:radial-gradient(circle at 35% 30%,rgba(176,224,255,.38),rgba(78,166,239,.22) 55%,transparent 72%)}
+
+.bg-hero .btn.primary,.bg-navy .btn.primary,.bg-blue .btn.primary,.bg-end .btn.primary{background:linear-gradient(135deg,#b9e5ff,#7cc7ff);color:#092852;box-shadow:0 12px 30px rgba(64,158,228,.25)}
+.stage::before{background:radial-gradient(circle,rgba(169,219,255,.3),transparent 66%)}
+.progress{background:linear-gradient(90deg,#4da9ed,#c9eaff)}
+.section-waves{position:absolute;left:0;bottom:-1px;width:100%;height:clamp(80px,14vw,175px);color:var(--wave-color);pointer-events:none;z-index:0;opacity:.13}
+.section-waves path{fill:none;stroke:currentColor;stroke-width:1.3;vector-effect:non-scaling-stroke}
+.section-dots{position:absolute;right:-30px;top:14%;width:200px;height:240px;background:radial-gradient(circle,var(--wave-color) 1px,transparent 1.5px) 0 0/20px 20px;opacity:.12;mask-image:linear-gradient(90deg,transparent,#000);pointer-events:none;z-index:0;transform:rotate(-12deg)}
+/* Simple, accessible disclosure lists replace the games. */
+.section-eyebrow{font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;color:var(--section-accent);font-weight:500;margin-bottom:14px}
+#tech-stack h2,#feasibility h2{max-width:20ch}.tech-filters{display:flex;gap:8px;flex-wrap:wrap;margin:28px 0}
+.tech-filters button{padding:10px 16px;min-height:44px;border:1px solid #b8dfff4d;border-radius:99px;font-size:.85rem;background:#ffffff08;transition:background .2s,color .2s}
+.tech-filters button:hover{background:#ffffff17}.tech-filters button[aria-pressed=true]{background:#cbeaff;color:#102e54;border-color:#cbeaff}
+.tech-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start}.tech-groups.is-filtered{grid-template-columns:minmax(0,1fr);max-width:840px}
+.group-heading{font:500 .8rem var(--body);letter-spacing:.03em;margin:0 0 14px;color:#b5daf4}
+.tech-list{border:1px solid #c0e2ff33;border-radius:22px;background:#ffffff06;overflow:hidden}
+.tech-item+ .tech-item{border-top:1px solid #c0e2ff26}
+.tech-item summary{display:grid;grid-template-columns:minmax(0,1fr) 20px;gap:9px 12px;position:relative;padding:22px;cursor:pointer;list-style:none}
+.tech-item summary::-webkit-details-marker,.feas-item summary::-webkit-details-marker{display:none}
+.tech-heading{font-weight:500;font-size:.98rem;line-height:1.4}.tech-tool-line{grid-column:1;font-size:.78rem;color:#b9d6ee;line-height:1.7;overflow-wrap:anywhere}
+.detail-plus{font-size:1.3rem;font-weight:350;line-height:1;grid-column:2;grid-row:1;transition:transform .2s;color:var(--section-accent)}
+.tech-item[open] .detail-plus,.feas-item[open] .detail-plus{transform:rotate(45deg)}
+.tech-item[open] summary{background:#ffffff08}.tech-description{padding:0 22px 22px;font-size:.89rem;line-height:1.75;color:#e3effa}
+.tech-description p{padding-top:16px;border-top:1px solid #b5daf426}.tech-item summary:hover{background:#ffffff08}
+.feas-list{max-width:980px;margin-top:32px;border:1px solid #713b2926;border-radius:24px;background:#fff8;overflow:hidden}
+.feas-item+.feas-item{border-top:1px solid #713b291f}.feas-item summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:32px minmax(0,1fr) auto 20px;gap:16px;align-items:center;padding:22px 26px}
+.feas-item summary:hover{background:#fff7}.feas-num{font-size:.8rem;color:#9a5944;font-variant-numeric:tabular-nums}.feas-heading{font-weight:500;font-size:1rem}
+.feas-badge{font-size:.72rem;background:#f3dece;color:#744532;padding:5px 10px;border-radius:99px;white-space:nowrap}.feas-item .detail-plus{grid-column:4;grid-row:1;color:#86513d}
+.feas-body{padding:0 60px 24px 74px;max-width:85ch;font-size:.95rem;line-height:1.8;color:#3c4557}
+.tech-item summary:focus-visible,.feas-item summary:focus-visible{outline-offset:-4px}.tech-group[hidden]{display:none}
+/* Surfy's small, optional backstory disclosure. */
+.surfy-story{max-width:710px;margin:32px auto 0;border:1px dashed #c5e8ff70;border-radius:22px;background:#061f5024}
+.surfy-story>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:12px;padding:18px 22px;font-size:.86rem;color:#e3f4ff}
+.surfy-story>summary::-webkit-details-marker{display:none}.story-star{font-size:1.15rem}.story-hint{margin-left:auto;font-size:.73rem;opacity:.7}.story-content{padding:0 24px 24px}.story-intro{display:flex;align-items:center;gap:20px;margin-bottom:18px}.story-intro img{width:78px;flex:none;filter:drop-shadow(0 8px 12px #0002)}
+.story-intro h3{font-size:1.6rem;margin-bottom:7px}.story-content p{font-size:.92rem;line-height:1.8}.story-facts{display:grid;grid-template-columns:1fr 1fr;gap:14px}.story-fact{padding:16px;border-radius:16px;background:#d4eeff12}.story-fact b{display:block;color:#cdeaff;font-weight:500;font-size:.84rem;margin-bottom:5px}.story-quote{margin-top:18px;padding-left:16px;border-left:2px solid #acdfff;font-family:var(--display);font-size:1.25rem!important;color:#dcf2ff}
+@media(max-width:1000px){.tech-groups{grid-template-columns:minmax(0,1fr)}.tech-group{min-width:0}}
+@media(max-width:600px){.tech-item summary{padding:18px}.tech-description{padding:0 18px 18px}.feas-item summary{grid-template-columns:26px minmax(0,1fr) 18px;gap:10px;padding:18px}.feas-badge{grid-column:2;justify-self:start}.feas-item .detail-plus{grid-column:3}.feas-body{padding:0 20px 22px 54px}.feas-heading{font-size:.94rem}.story-facts{grid-template-columns:1fr}.story-content{padding:0 18px 20px}.story-intro{align-items:flex-start;gap:14px}.story-intro img{width:60px}.story-hint{display:none}.section-dots{width:100px;opacity:.09}}
+
+.next .future-note{font-size:.85rem;line-height:1.75;margin-top:16px;max-width:70ch;opacity:.8}
 </style>
 </head>
 <body>
@@ -385,7 +459,7 @@ footer{padding:26px;text-align:center;font-size:.82rem;opacity:.7;background:#04
 <div class="lang" role="group" aria-label="Language">
   <span class="lang-ic" aria-hidden="true">🌐</span>
   <button type="button" data-lang="en" aria-pressed="true">English</button>
-  <button type="button" data-lang="tl" aria-pressed="false">Tagalog</button>
+  <button type="button" data-lang="tl" aria-pressed="false">Filipino</button>
   <button type="button" data-lang="tg" aria-pressed="false">Taglish</button>
 </div>
 <nav class="dots" id="dots" aria-label="Slides" data-dyn></nav>
@@ -452,7 +526,7 @@ footer{padding:26px;text-align:center;font-size:.82rem;opacity:.7;background:#04
       <strong>The need: a safety tool that works at a basic level offline, checks online when it can, and explains itself in simple language.</strong>
     </div>
   </div>
-</section>
+<svg class="section-waves" viewBox="0 0 1440 180" preserveAspectRatio="none" aria-hidden="true"><path d="M-80 85 C180 -20 340 185 610 90 S1030 0 1520 95"/><path d="M-80 109 C180 4 340 209 610 114 S1030 24 1520 119"/><path d="M-80 133 C180 28 340 233 610 138 S1030 48 1520 143"/><path d="M-80 157 C180 52 340 257 610 162 S1030 72 1520 167"/></svg></section>
 
 <!-- 4 · Solution -->
 <section class="bg-hero" id="solution" data-title="The solution">
@@ -470,7 +544,7 @@ footer{padding:26px;text-align:center;font-size:.82rem;opacity:.7;background:#04
       <p class="mode-note" id="modeNote" data-dyn></p>
     </div>
   </div>
-</section>
+<svg class="section-waves" viewBox="0 0 1440 180" preserveAspectRatio="none" aria-hidden="true"><path d="M-80 85 C180 -20 340 185 610 90 S1030 0 1520 95"/><path d="M-80 109 C180 4 340 209 610 114 S1030 24 1520 119"/><path d="M-80 133 C180 28 340 233 610 138 S1030 48 1520 143"/><path d="M-80 157 C180 52 340 257 610 162 S1030 72 1520 167"/></svg></section>
 
 <!-- 5 · Demo -->
 <section class="bg-peach light" id="demo" data-title="Try it">
@@ -536,19 +610,19 @@ footer{padding:26px;text-align:center;font-size:.82rem;opacity:.7;background:#04
     </div>
     <p class="type-note" id="typeNote" data-dyn></p>
   </div>
-</section>
+<svg class="section-waves" viewBox="0 0 1440 180" preserveAspectRatio="none" aria-hidden="true"><path d="M-80 85 C180 -20 340 185 610 90 S1030 0 1520 95"/><path d="M-80 109 C180 4 340 209 610 114 S1030 24 1520 119"/><path d="M-80 133 C180 28 340 233 610 138 S1030 48 1520 143"/><path d="M-80 157 C180 52 340 257 610 162 S1030 72 1520 167"/></svg><div class="section-dots" aria-hidden="true"></div></section>
 
 <!-- 7 · Features -->
 <section class="bg-foam light" id="features" data-title="Features">
   <div class="glow" style="width:520px;height:520px;left:-140px;top:-100px;background:rgba(30,136,229,.22)"></div>
   <div class="wrap">
-    <h2>Nine features, one calm guide</h2>
+    <h2>Ten features, one calm guide</h2>
     <div class="feat">
       <div class="feat-tabs" role="tablist" id="featTabs" aria-label="Features" data-dyn></div>
       <div class="feat-pane" id="featPane" role="tabpanel" aria-live="polite" data-dyn></div>
     </div>
   </div>
-</section>
+<svg class="section-waves" viewBox="0 0 1440 180" preserveAspectRatio="none" aria-hidden="true"><path d="M-80 85 C180 -20 340 185 610 90 S1030 0 1520 95"/><path d="M-80 109 C180 4 340 209 610 114 S1030 24 1520 119"/><path d="M-80 133 C180 28 340 233 610 138 S1030 48 1520 143"/><path d="M-80 157 C180 52 340 257 610 162 S1030 72 1520 167"/></svg></section>
 
 <!-- 8 · Camera coach -->
 <section class="bg-wine" id="camera" data-title="Camera coach">
@@ -590,8 +664,9 @@ footer{padding:26px;text-align:center;font-size:.82rem;opacity:.7;background:#04
         </div>
       </div>
     </div>
+<details class="surfy-story"><summary><span class="story-star" aria-hidden="true">✦</span><span>A tiny secret about Surfy</span><span class="story-hint">Curious?</span></summary><div class="story-content"><div class="story-intro"><img data-img="happy" alt="Surfy smiling"><div><h3>Small head. Big dreams.</h3><p>Before he became your digital safety buddy, Surfy had one very important goal: a bright future. Literally.</p></div></div><div class="story-facts"><div class="story-fact"><b>✨ Why so shiny?</b><p>He keeps his head bald and shiny for a bright future. His morning routine? One polish, two big dreams, zero bad hair days.</p></div><div class="story-fact"><b>♟ A little chess nerd</b><p>He loves chess. He thinks three moves ahead, but still says “wait, one more game” six games later.</p></div><div class="story-fact"><b>🫧 Off-duty Surfy</b><p>He counts waves to relax and practices his victory pose in the mirror. He calls both “important research.”</p></div><div class="story-fact"><b>💌 His biggest soft spot</b><p>Nothing makes him happier than someone saying, “Oh, now I understand!” He saves every imaginary thank-you note.</p></div></div><p style="font-size:.78rem;opacity:.75;margin-top:16px">mapagkakatiwalaan na kalbo</p><p class="story-quote">“Stay curious. Think before you click. And moisturise your future.”</p></div></details>
   </div>
-</section>
+<svg class="section-waves" viewBox="0 0 1440 180" preserveAspectRatio="none" aria-hidden="true"><path d="M-80 85 C180 -20 340 185 610 90 S1030 0 1520 95"/><path d="M-80 109 C180 4 340 209 610 114 S1030 24 1520 119"/><path d="M-80 133 C180 28 340 233 610 138 S1030 48 1520 143"/><path d="M-80 157 C180 52 340 257 610 162 S1030 72 1520 167"/></svg></section>
 
 <!-- 10 · Users -->
 <section class="bg-foam light" id="users" data-title="Who it helps">
@@ -614,7 +689,7 @@ footer{padding:26px;text-align:center;font-size:.82rem;opacity:.7;background:#04
       </div>
     </div>
   </div>
-</section>
+<svg class="section-waves" viewBox="0 0 1440 180" preserveAspectRatio="none" aria-hidden="true"><path d="M-80 85 C180 -20 340 185 610 90 S1030 0 1520 95"/><path d="M-80 109 C180 4 340 209 610 114 S1030 24 1520 119"/><path d="M-80 133 C180 28 340 233 610 138 S1030 48 1520 143"/><path d="M-80 157 C180 52 340 257 610 162 S1030 72 1520 167"/></svg><div class="section-dots" aria-hidden="true"></div></section>
 
 <!-- 11 · Objectives -->
 <section class="bg-navy" id="objectives" data-title="Objectives">
@@ -625,9 +700,10 @@ footer{padding:26px;text-align:center;font-size:.82rem;opacity:.7;background:#04
     <div class="filters" id="filters" role="group" aria-label="Filter objectives" data-dyn></div>
     <div class="objs" id="objs" data-dyn></div>
   </div>
-</section>
+<svg class="section-waves" viewBox="0 0 1440 180" preserveAspectRatio="none" aria-hidden="true"><path d="M-80 85 C180 -20 340 185 610 90 S1030 0 1520 95"/><path d="M-80 109 C180 4 340 209 610 114 S1030 24 1520 119"/><path d="M-80 133 C180 28 340 233 610 138 S1030 48 1520 143"/><path d="M-80 157 C180 52 340 257 610 162 S1030 72 1520 167"/></svg></section>
 
 <!-- 12 · Trust -->
+<section class="bg-navy" id="tech-stack" data-title="Tech stack"><div class="wrap"><p class="section-eyebrow">Planned implementation</p><h2>The tools behind Surfare</h2><p class="lede" style="margin-top:18px">Browse the stack by purpose. Open a tool to see how it supports the proposed system.</p><div class="tech-filters" role="group" aria-label="Filter technologies"><button type="button" data-tech-filter="all" aria-pressed="true">All tools</button><button type="button" data-tech-filter="0" aria-pressed="false">App &amp; offline</button><button type="button" data-tech-filter="1" aria-pressed="false">Detection pipeline</button><button type="button" data-tech-filter="2" aria-pressed="false">Guidance &amp; testing</button></div><div class="tech-groups"><div class="tech-group" data-tech-group="0"><h3 class="group-heading">App &amp; offline</h3><div class="tech-list"><details class="tech-item"><summary><span class="tech-heading">Frontend Development</span><span class="tech-tool-line">React.js · Vite · JavaScript · Tailwind CSS</span><span class="detail-plus" aria-hidden="true">+</span></summary><div class="tech-description"><p>A responsive and accessible user interface.</p></div></details><details class="tech-item"><summary><span class="tech-heading">Offline Functionality</span><span class="tech-tool-line">PWA · vite-plugin-pwa · Workbox</span><span class="detail-plus" aria-hidden="true">+</span></summary><div class="tech-description"><p>Cache the application, detection rules, and required OCR resources for offline use after initial download.</p></div></details><details class="tech-item"><summary><span class="tech-heading">Backend and API Integration</span><span class="tech-tool-line">Cloudflare Workers</span><span class="detail-plus" aria-hidden="true">+</span></summary><div class="tech-description"><p>Handle online threat-checking requests and keep API credentials outside frontend code, within free-tier limits.</p></div></details></div></div><div class="tech-group" data-tech-group="1"><h3 class="group-heading">Detection pipeline</h3><div class="tech-list"><details class="tech-item"><summary><span class="tech-heading">Message Threat Detection</span><span class="tech-tool-line">JavaScript contextual rules</span><span class="detail-plus" aria-hidden="true">+</span></summary><div class="tech-description"><p>English, Filipino, and Taglish rules assess combinations of urgency, impersonation, advance-payment demands, and password or OTP requests.</p></div></details><details class="tech-item"><summary><span class="tech-heading">URL Analysis and Online Verification</span><span class="tech-tool-line">URL API · tldts · Google Safe Browsing API</span><span class="detail-plus" aria-hidden="true">+</span></summary><div class="tech-description"><p>Examine actual domains and suspicious URL structures; check known unsafe links online, subject to free noncommercial terms and quotas.</p></div></details><details class="tech-item"><summary><span class="tech-heading">Image and QR Code Analysis</span><span class="tech-tool-line">Tesseract.js · jsQR</span><span class="detail-plus" aria-hidden="true">+</span></summary><div class="tech-description"><p>Extract image text and decode QR codes, then assess the text and URLs through the message and URL modules.</p></div></details><details class="tech-item"><summary><span class="tech-heading">Camera and Image Quality Analysis</span><span class="tech-tool-line">Web Camera API · Canvas API · OpenCV.js</span><span class="detail-plus" aria-hidden="true">+</span></summary><div class="tech-description"><p>Assess blur, brightness, and potential glare; preprocess images to support text extraction.</p></div></details></div></div><div class="tech-group" data-tech-group="2"><h3 class="group-heading">Guidance &amp; testing</h3><div class="tech-list"><details class="tech-item"><summary><span class="tech-heading">Risk Classification and Explanations</span><span class="tech-tool-line">JavaScript decision engine</span><span class="detail-plus" aria-hidden="true">+</span></summary><div class="tech-description"><p>Combine detected indicators and available threat intelligence into risk categories, clear explanations, or an insufficient-evidence result.</p></div></details><details class="tech-item"><summary><span class="tech-heading">Surfy: Guided Safety Assistant</span><span class="tech-tool-line">Template-based JavaScript responses</span><span class="detail-plus" aria-hidden="true">+</span></summary><div class="tech-description"><p>Connect detected warning signs and predefined follow-up questions to relevant safety guidance.</p></div></details><details class="tech-item"><summary><span class="tech-heading">Detection Evaluation</span><span class="tech-tool-line">Separate labeled test set</span><span class="detail-plus" aria-hidden="true">+</span></summary><div class="tech-description"><p>Measure precision, recall, false positives, OCR performance, and online and offline functionality using legitimate and scam content in English, Filipino, and Taglish.</p></div></details></div></div></div></div><svg class="section-waves" viewBox="0 0 1440 180" preserveAspectRatio="none" aria-hidden="true"><path d="M-80 85 C180 -20 340 185 610 90 S1030 0 1520 95"/><path d="M-80 109 C180 4 340 209 610 114 S1030 24 1520 119"/><path d="M-80 133 C180 28 340 233 610 138 S1030 48 1520 143"/><path d="M-80 157 C180 52 340 257 610 162 S1030 72 1520 167"/></svg><div class="section-dots" aria-hidden="true"></div></section><section class="bg-peach light" id="feasibility" data-title="Feasibility"><div class="wrap"><p class="section-eyebrow">A practical plan</p><h2>How the plan stays achievable</h2><p class="lede" style="margin-top:18px">A focused first version, free tools within their limits, and clear ways to test the results.</p><div class="feas-list"><details class="feas-item" open><summary><span class="feas-num" aria-hidden="true">01</span><span class="feas-heading">Technical feasibility</span><span class="feas-badge">Browser-based</span><span class="detail-plus" aria-hidden="true">+</span></summary><div class="feas-body"><p>The proposed MVP uses browser-based rules, OCR, QR decoding, and online URL checks. Images feed the same text and URL modules, reducing duplicated work.</p></div></details><details class="feas-item"><summary><span class="feas-num" aria-hidden="true">02</span><span class="feas-heading">Cost feasibility</span><span class="feas-badge">Free tiers</span><span class="detail-plus" aria-hidden="true">+</span></summary><div class="feas-body"><p>The prototype can use free libraries and free service tiers. Google Safe Browsing is limited to noncommercial use; API quotas and Cloudflare Workers limits must be respected.</p></div></details><details class="feas-item"><summary><span class="feas-num" aria-hidden="true">03</span><span class="feas-heading">Offline readiness</span><span class="feas-badge">After download</span><span class="detail-plus" aria-hidden="true">+</span></summary><div class="feas-body"><p>After the initial download, cache the app, rules, OCR runtime, worker, and language files. Online reputation checks remain unavailable without connectivity.</p></div></details><details class="feas-item"><summary><span class="feas-num" aria-hidden="true">04</span><span class="feas-heading">Achievable scope</span><span class="feas-badge">Phased MVP</span><span class="detail-plus" aria-hidden="true">+</span></summary><div class="feas-body"><p>Build text and URL checks first, then image OCR and QR decoding, followed by Camera Coach and Surfy templates. Video analysis and an AI-powered Surfy remain future upgrades.</p></div></details><details class="feas-item"><summary><span class="feas-num" aria-hidden="true">05</span><span class="feas-heading">Accuracy validation</span><span class="feas-badge">Measured results</span><span class="detail-plus" aria-hidden="true">+</span></summary><div class="feas-body"><p>Evaluate a held-out English, Filipino, and Taglish test set. Report precision, recall, false positives, and OCR errors; use an insufficient-evidence result when checks are inconclusive.</p></div></details><details class="feas-item"><summary><span class="feas-num" aria-hidden="true">06</span><span class="feas-heading">Operational feasibility</span><span class="feas-badge">Web access</span><span class="detail-plus" aria-hidden="true">+</span></summary><div class="feas-body"><p>A responsive web app avoids a separate native installation. Language switching, plain explanations, and on-device processing support accessible guidance and limited data collection.</p></div></details></div></div><svg class="section-waves" viewBox="0 0 1440 180" preserveAspectRatio="none" aria-hidden="true"><path d="M-80 85 C180 -20 340 185 610 90 S1030 0 1520 95"/><path d="M-80 109 C180 4 340 209 610 114 S1030 24 1520 119"/><path d="M-80 133 C180 28 340 233 610 138 S1030 48 1520 143"/><path d="M-80 157 C180 52 340 257 610 162 S1030 72 1520 167"/></svg></section>
 <section class="bg-wine" id="trust" data-title="Trust and next">
   <div class="glow" style="width:520px;height:520px;right:-120px;top:-100px;background:rgba(255,107,74,.35)"></div>
   <div class="wrap">
@@ -641,12 +717,12 @@ footer{padding:26px;text-align:center;font-size:.82rem;opacity:.7;background:#04
       <img data-img="detect" alt="">
       <div>
         <h3>What comes next</h3>
-        <p>Future versions will grow in two directions.</p>
-        <div class="chips"><span>Video analysis</span><span>Surfy upgraded into an AI-powered assistant</span></div>
+        <p>Future phases need additional development time, model evaluation, and computing resources.</p>
+        <div class="chips"><span>Video analysis</span><span>AI-generated image, video, and audio detection</span><span>Surfy upgraded into an AI-powered assistant</span></div><p class="future-note">AI-generated content detection is a future research and development goal, outside the current MVP’s time and cost limits. It would provide indicators of possible AI generation, rather than a guaranteed authenticity verdict.</p>
       </div>
     </div>
   </div>
-</section>
+<svg class="section-waves" viewBox="0 0 1440 180" preserveAspectRatio="none" aria-hidden="true"><path d="M-80 85 C180 -20 340 185 610 90 S1030 0 1520 95"/><path d="M-80 109 C180 4 340 209 610 114 S1030 24 1520 119"/><path d="M-80 133 C180 28 340 233 610 138 S1030 48 1520 143"/><path d="M-80 157 C180 52 340 257 610 162 S1030 72 1520 167"/></svg></section>
 
 <!-- 13 · Video Demo + Proposal -->
 <section class="bg-end" id="pitch" data-title="Video pitch">
@@ -687,7 +763,8 @@ footer{padding:26px;text-align:center;font-size:.82rem;opacity:.7;background:#04
     </div>
 
   </div>
-</section>
+<svg class="section-waves" viewBox="0 0 1440 180" preserveAspectRatio="none" aria-hidden="true"><path d="M-80 85 C180 -20 340 185 610 90 S1030 0 1520 95"/><path d="M-80 109 C180 4 340 209 610 114 S1030 24 1520 119"/><path d="M-80 133 C180 28 340 233 610 138 S1030 48 1520 143"/><path d="M-80 157 C180 52 340 257 610 162 S1030 72 1520 167"/></svg></section>
+
 
 <footer>Team g(oat)ed</footer>
 
@@ -751,7 +828,7 @@ const TR={
  "Links":[`Mga link`,`Links`],
  "Images":[`Mga larawan`,`Images`],
  "QR codes":[`Mga QR code`,`QR codes`],
- "Nine features, one calm guide":[`Siyam na tampok, isang mahinahong gabay`,`Siyam na features, isang kalmadong guide`],
+ "Ten features, one calm guide":[`Sampung tampok, isang mahinahong gabay`,`Sampung features, isang kalmadong guide`],
  "A camera coach built on how light behaves":[`Isang camera coach na batay sa kilos ng liwanag`,`Camera coach na nakabase sa kung paano kumikilos ang light`],
  "Before a photo or QR scan is submitted, Surfare checks blur, low light, and glare, then tells the user how to fix them. Move the sliders to see it work.":[`Bago isumite ang larawan o i-scan ang QR, sinusuri ng Surfare ang labo, kakulangan sa liwanag, at silaw, saka sasabihin sa user kung paano ito aayusin. Igalaw ang mga slider para makita kung paano ito gumagana.`,`Bago i-submit ang photo o QR scan, chine-check ng Surfare ang blur, low light, at glare, tapos sasabihin sa user kung paano ito aayusin. Igalaw ang sliders para makita kung paano gumagana.`],
  "Camera shake and focus":[`Panginginig at focus ng camera`,`Camera shake at focus`],
@@ -808,6 +885,7 @@ const TR={
 
 const OVER=[`Over `,`Mahigit `,`Over `];
 const SECT={
+ 'Tech stack':[`Tech stack`,`Mga teknolohiya`,`Tech stack`],'Feasibility':[`Feasibility`,`Kakayahan ng proyekto`,`Feasibility`],
  'Welcome':[`Welcome`,`Maligayang pagdating`,`Welcome`],'The problem':[`The problem`,`Ang problema`,`Ang problema`],'The gap':[`The gap`,`Ang kakulangan`,`Ang gap`],
  'The solution':[`The solution`,`Ang solusyon`,`Ang solution`],'Try it':[`Try it`,`Subukan`,`Try it`],'How it works':[`How it works`,`Paano ito gumagana`,`Paano ito gumagana`],
  'Features':[`Features`,`Mga tampok`,`Features`],'Camera coach':[`Camera coach`,`Camera coach`,`Camera coach`],'Surfy':[`Surfy`,`Surfy`,`Surfy`],
@@ -859,6 +937,10 @@ function setLang(i,fade){
   if(fade)fadeStatic();
 }
 $$('.lang button').forEach(b=>b.onclick=()=>setLang(LANGS.indexOf(b.dataset.lang),true));
+Object.assign(TR,{"A responsive and accessible user interface.": ["Isang tumutugon at madaling gamiting interface.", "Responsive at accessible na user interface."], "Cache the application, detection rules, and required OCR resources for offline use after initial download.": ["I-cache ang app, mga patakaran, at kailangang OCR resources para magamit offline matapos ang unang download.", "I-cache ang app, detection rules, at OCR resources para gumana offline pagkatapos ng initial download."], "English, Filipino, and Taglish rules assess combinations of urgency, impersonation, advance-payment demands, and password or OTP requests.": ["Mga patakaran sa English, Filipino, at Taglish para sa pagmamadali, pagpapanggap, paunang bayad, at paghingi ng password o OTP.", "English, Filipino, at Taglish rules para sa urgency, impersonation, advance payment, at password o OTP requests."], "Examine actual domains and suspicious URL structures; check known unsafe links online, subject to free noncommercial terms and quotas.": ["Suriin ang tunay na domain at kahina-hinalang URL; beripikahin ang kilalang mapanganib na link online ayon sa libreng noncommercial na tuntunin at quota.", "I-check ang actual domain at suspicious URLs; may online check para sa known unsafe links, subject sa free noncommercial terms at quotas."], "Extract image text and decode QR codes, then assess the text and URLs through the message and URL modules.": ["Kunin ang teksto at i-decode ang QR code, saka suriin gamit ang mga module para sa mensahe at URL.", "Kunin ang image text at decoded QR codes, tapos i-check gamit ang message at URL modules."], "Assess blur, brightness, and potential glare; preprocess images to support text extraction.": ["Suriin ang labo, liwanag, at posibleng silaw; ihanda ang larawan para sa pagkuha ng teksto.", "I-check ang blur, brightness, at possible glare; i-preprocess ang images para makatulong sa OCR."], "Handle online threat-checking requests and keep API credentials outside frontend code, within free-tier limits.": ["Pangasiwaan ang online na pagsusuri at panatilihing hiwalay sa frontend ang API credentials, sa loob ng libreng limitasyon.", "I-handle ang online checks at itago ang API credentials sa backend, within free-tier limits."], "Combine detected indicators and available threat intelligence into risk categories, clear explanations, or an insufficient-evidence result.": ["Pagsamahin ang mga senyales at impormasyon upang magbigay ng antas ng panganib, malinaw na paliwanag, o resultang kulang ang ebidensya.", "Pagsamahin ang indicators at threat intelligence para sa risk level, clear explanations, o insufficient-evidence result."], "Connect detected warning signs and predefined follow-up questions to relevant safety guidance.": ["Iugnay ang mga babala at nakahandang tanong sa angkop na gabay sa kaligtasan.", "I-connect ang warning signs at predefined questions sa relevant safety guidance."], "Measure precision, recall, false positives, OCR performance, and online and offline functionality using legitimate and scam content in English, Filipino, and Taglish.": ["Sukatin ang precision, recall, maling babala, OCR, at paggana online at offline gamit ang tunay at scam na nilalaman sa tatlong wika.", "I-measure ang precision, recall, false positives, OCR performance, at online/offline functionality gamit ang legitimate at scam samples sa tatlong wika."], "The tools behind Surfare": ["Mga teknolohiya sa likod ng Surfare", "Ang tools sa likod ng Surfare"], "A concrete implementation plan, grouped by system function.": ["Isang tiyak na plano ng implementasyon ayon sa tungkulin ng sistema.", "Isang concrete implementation plan ayon sa system function."], "A practical path to a working prototype": ["Praktikal na landas tungo sa gumaganang prototype", "Practical na paraan para sa working prototype"], "Feasibility rests on a focused MVP, free tools within their limits, and measurable testing.": ["Nakabatay ang plano sa malinaw na MVP, libreng kagamitan sa loob ng limitasyon, at nasusukat na pagsubok.", "Nakabase ang feasibility sa focused MVP, free tools within limits, at measurable testing."], "Technical feasibility": ["Teknikal na kakayahan", "Technical feasibility"], "The proposed MVP uses browser-based rules, OCR, QR decoding, and online URL checks. Images feed the same text and URL modules, reducing duplicated work.": ["Gagamit ang MVP ng browser rules, OCR, QR decoding, at online URL checks. Iisang module ang susuri sa nakuhang teksto at URL.", "Gagamit ang MVP ng browser rules, OCR, QR decoding, at online URL checks. Reused ang text at URL modules para mas kaunti ang duplicated work."], "Cost feasibility": ["Kakayahan sa gastos", "Cost feasibility"], "The prototype can use free libraries and free service tiers. Google Safe Browsing is limited to noncommercial use; API quotas and Cloudflare Workers limits must be respected.": ["Maaaring gumamit ang prototype ng libreng libraries at service tiers. Para lamang sa noncommercial use ang Google Safe Browsing; kailangang sundin ang API quota at Workers limits.", "Puwedeng gumamit ang prototype ng free libraries at service tiers. Noncommercial lang ang Google Safe Browsing; kailangang sundin ang API quotas at Workers limits."], "Offline readiness": ["Kahandaan sa offline", "Offline readiness"], "After the initial download, cache the app, rules, OCR runtime, worker, and language files. Online reputation checks remain unavailable without connectivity.": ["Pagkatapos ng unang download, i-cache ang app, rules, OCR runtime, worker, at language files. Kailangan ng internet ang online reputation checks.", "Pagkatapos ng initial download, i-cache ang app, rules, OCR runtime, worker, at language files. Kailangan pa rin ng internet para sa online reputation checks."], "Achievable scope": ["Kayang saklaw", "Achievable scope"], "Build text and URL checks first, then image OCR and QR decoding, followed by Camera Coach and Surfy templates. Video analysis and an AI-powered Surfy remain future upgrades.": ["Unahin ang teksto at URL, kasunod ang OCR at QR, saka Camera Coach at mga template ni Surfy. Para sa susunod na bersyon ang video analysis at AI-powered Surfy.", "Unahin ang text at URL checks, tapos OCR at QR, saka Camera Coach at Surfy templates. Future upgrades ang video analysis at AI-powered Surfy."], "Accuracy validation": ["Pagpapatunay ng pagtukoy", "Accuracy validation"], "Evaluate a held-out English, Filipino, and Taglish test set. Report precision, recall, false positives, and OCR errors; use an insufficient-evidence result when checks are inconclusive.": ["Subukan sa hiwalay na test set sa English, Filipino, at Taglish. Iulat ang precision, recall, maling babala, at OCR errors; sabihin kapag kulang ang ebidensya.", "I-test sa hiwalay na English, Filipino, at Taglish test set. I-report ang precision, recall, false positives, at OCR errors; sabihin kapag kulang ang evidence."], "Operational feasibility": ["Kakayahan sa paggamit", "Operational feasibility"], "A responsive web app avoids a separate native installation. Language switching, plain explanations, and on-device processing support accessible guidance and limited data collection.": ["Hindi kailangan ng hiwalay na native app. Ang pagpapalit ng wika, malinaw na paliwanag, at lokal na pagproseso ay tumutulong sa paggamit at limitadong pangongolekta ng data.", "Hindi kailangan ng separate native app. Language switching, plain explanations, at on-device processing ang tutulong sa accessibility at limited data collection."]});
+Object.assign(TR,{"Build your safety toolkit": ["Buuin ang iyong safety toolkit", "Buuin ang safety toolkit mo"], "Pick a power-up, explore what it does, then add it to your build. Collect all ten to complete Surfare.": ["Pumili ng power-up, alamin ang gamit nito, at idagdag sa iyong build. Kolektahin ang sampu para mabuo ang Surfare.", "Pumili ng power-up, alamin ang ginagawa nito, tapos idagdag sa build mo. Collect all ten para mabuo ang Surfare."], "Take Surfare on a test drive": ["Subukan ang plano ng Surfare", "I-test drive ang Surfare"], "Drop into a tricky situation. Change the conditions and see how the proposed system would respond.": ["Pumili ng mahirap na sitwasyon. Baguhin ang mga kondisyon at tingnan ang planong tugon ng sistema.", "Pumili ng tricky situation. Baguhin ang conditions at tingnan kung paano sasagot ang proposed system."], "All technologies & implementation notes": ["Lahat ng teknolohiya at tala sa implementasyon", "Lahat ng tools at implementation notes"], "Read the full feasibility plan": ["Basahin ang buong plano ng feasibility", "Basahin ang full feasibility plan"]});
+Object.assign(TR,{"App & offline": ["App at offline", "App at offline"], "Detection pipeline": ["Proseso ng pagtukoy", "Detection pipeline"], "Guidance & testing": ["Gabay at pagsusuri", "Guidance at testing"], "All tools": ["Lahat ng kagamitan", "All tools"], "Planned implementation": ["Planong implementasyon", "Planned implementation"], "The tools behind Surfare": ["Mga teknolohiya sa likod ng Surfare", "Ang tools sa likod ng Surfare"], "Browse the stack by purpose. Open a tool to see how it supports the proposed system.": ["Tingnan ang mga kagamitan ayon sa gamit. Buksan ang bawat isa upang malaman ang papel nito sa sistema.", "Browse ang stack ayon sa purpose. Buksan ang tool para makita kung paano ito tutulong sa proposed system."], "Browser-based": ["Sa browser", "Browser-based"], "Free tiers": ["Libreng antas", "Free tiers"], "After download": ["Pagkatapos ng download", "After download"], "Phased MVP": ["Unti-unting MVP", "Phased MVP"], "Measured results": ["Nasusukat na resulta", "Measured results"], "Web access": ["Access sa web", "Web access"], "A practical plan": ["Isang praktikal na plano", "Isang practical na plan"], "How the plan stays achievable": ["Paano magiging kayang gawin ang plano", "Paano magiging achievable ang plan"], "A focused first version, free tools within their limits, and clear ways to test the results.": ["Isang malinaw na unang bersyon, libreng kagamitan sa loob ng limitasyon, at malinaw na pagsusuri ng resulta.", "Focused na first version, free tools within limits, at clear na paraan para i-test ang results."], "A tiny secret about Surfy": ["Isang munting lihim ni Surfy", "Isang little secret ni Surfy"], "Curious?": ["Nagtataka?", "Curious ka?"], "Small head. Big dreams.": ["Munting ulo. Malalaking pangarap.", "Small head. Big dreams."], "Before he became your digital safety buddy, Surfy had one very important goal: a bright future. Literally.": ["Bago siya naging digital safety buddy mo, may mahalagang pangarap si Surfy: isang maliwanag na kinabukasan. Literal.", "Bago siya naging digital safety buddy mo, may goal si Surfy: a bright future. Literal talaga."], "✨ Why so shiny?": ["✨ Bakit makintab?", "✨ Bakit shiny?"], "He keeps his head bald and shiny for a bright future. His morning routine? One polish, two big dreams, zero bad hair days.": ["Kalbo at makintab ang ulo niya para sa maliwanag na kinabukasan. Tuwing umaga: isang punas, dalawang malaking pangarap, at walang bad hair day.", "Kalbo at shiny ang ulo niya para sa bright future. Morning routine? Isang polish, dalawang big dreams, zero bad hair days."], "♟ A little chess nerd": ["♟ Mahilig sa chess", "♟ Certified chess nerd"], "He loves chess. He thinks three moves ahead, but still says “wait, one more game” six games later.": ["Mahilig siya sa chess. Tatlong galaw na ang iniisip niya, pero anim na laro na at “isa pa” pa rin ang sinasabi.", "Mahilig siya sa chess. Three moves ahead mag-isip, pero six games later, “isa pa” pa rin."], "🫧 Off-duty Surfy": ["🫧 Kapag pahinga ni Surfy", "🫧 Off-duty Surfy"], "He counts waves to relax and practices his victory pose in the mirror. He calls both “important research.”": ["Nagbibilang siya ng alon para magpahinga at nag-eensayo ng victory pose sa salamin. Pareho raw “mahalagang pananaliksik.”", "Nagbibilang siya ng waves para mag-relax at nagpa-practice ng victory pose sa salamin. “Important research” daw pareho."], "💌 His biggest soft spot": ["💌 Ang nagpapasaya sa kanya", "💌 Ang soft spot niya"], "Nothing makes him happier than someone saying, “Oh, now I understand!” He saves every imaginary thank-you note.": ["Walang mas nagpapasaya sa kanya kaysa sa “Ah, naiintindihan ko na!” Iniingatan niya ang bawat kunwaring thank-you note.", "Pinakamasaya siya kapag may nagsabing “Ah, gets ko na!” Tinatago niya lahat ng imaginary thank-you notes."], "“Stay curious. Think before you click. And moisturise your future.”": ["“Maging mausisa. Mag-isip bago mag-click. At alagaan ang kinabukasan mong makintab.”", "“Stay curious. Think bago mag-click. At moisturise your future.”"]});
+Object.assign(TR,{"Future phases need additional development time, model evaluation, and computing resources.": ["Kailangan ng dagdag na oras, pagsusuri ng modelo, at computing resources para sa susunod na mga yugto.", "Kailangan ng additional development time, model evaluation, at computing resources para sa future phases."], "AI-generated image, video, and audio detection": ["Pagtukoy ng larawan, video, at audio na gawa ng AI", "AI-generated image, video, at audio detection"], "AI-generated content detection is a future research and development goal, outside the current MVP’s time and cost limits. It would provide indicators of possible AI generation, rather than a guaranteed authenticity verdict.": ["Layunin sa susunod na pananaliksik at pagbuo ang pagtukoy ng nilalamang gawa ng AI, lampas sa oras at badyet ng kasalukuyang MVP. Magbibigay ito ng mga palatandaan ng posibleng paggamit ng AI, hindi garantisadong hatol sa pagiging tunay.", "Future research at development goal ang AI-generated content detection, outside ng current MVP time at cost limits. Magbibigay ito ng indicators ng possible AI generation, hindi guaranteed authenticity verdict."]});
 initStatic();
 
 /* ---------- navigation ---------- */
@@ -872,7 +954,7 @@ const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){cur=s
 slides.forEach(s=>io.observe(s));
 addEventListener('scroll',()=>{const h=document.documentElement;$('#progress').style.transform=`scaleX(${h.scrollTop/(h.scrollHeight-h.clientHeight||1)})`;if(scrollY>80)$('#hint').classList.add('gone')},{passive:true});
 addEventListener('keydown',e=>{
-  if(e.target.matches('input,select,textarea'))return;
+  if(e.target.matches('input,select,textarea,video')||e.target.isContentEditable)return;
   if(['ArrowRight','PageDown'].includes(e.key)){e.preventDefault();go(1)}
   if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(-1)}
 });
@@ -1051,6 +1133,8 @@ $$('.type').forEach(b=>b.onclick=()=>{$$('.type').forEach(x=>x.setAttribute('ari
 
 /* ---------- features ---------- */
 const feats=[
+
+ 
  ['🔎',[`Multi-content threat assessment`,`Pagsusuri ng banta sa iba't ibang uri ng nilalaman`,`Multi-content threat assessment`],[`Submit suspicious text messages, URLs, images, and supported QR codes. Each content type is processed with the detection method that suits it.`,`Magsumite ng kahina-hinalang text message, URL, larawan, at suportadong QR code. Ang bawat uri ng nilalaman ay pinoproseso gamit ang angkop na paraan ng pagtukoy.`,`Mag-submit ng suspicious na text messages, URLs, images, at supported QR codes. Bawat content type ay pinoproseso gamit ang akmang detection method.`],'safe',[`Checks`,`Mga pagsusuri`,`Checks`]],
  ['📴',[`Offline-first detection`,`Pagtukoy na offline muna`,`Offline-first detection`],[`Locally stored rules identify predefined warning signs without internet, and the app shows which checks work offline and which need a connection.`,`Natutukoy ng mga lokal na nakaimbak na patakaran ang mga nakatakdang babalang senyales kahit walang internet, at ipinapakita ng app kung aling pagsusuri ang gumagana offline at alin ang nangangailangan ng koneksyon.`,`Natutukoy ng locally stored rules ang predefined warning signs kahit walang internet, at ipinapakita ng app kung aling checks ang gumagana offline at alin ang kailangan ng connection.`],'info',[`Works anywhere`,`Gumagana kahit saan`,`Works anywhere`]],
  ['🌐',[`Online threat verification`,`Beripikasyon ng banta online`,`Online threat verification`],[`When internet is available, an external threat-intelligence service checks supported URLs against known malicious or phishing indicators.`,`Kapag may internet, sinusuri ng panlabas na serbisyo ng threat intelligence ang mga suportadong URL laban sa mga kilalang palatandaan ng malware o phishing.`,`Kapag may internet, chine-check ng external threat-intelligence service ang supported URLs laban sa known malicious o phishing indicators.`],'detect',[`Extra evidence`,`Dagdag na ebidensya`,`Extra evidence`]],
@@ -1061,6 +1145,7 @@ const feats=[
  ['🔒',[`Privacy and secure file handling`,`Privacy at ligtas na paghawak ng file`,`Privacy at secure file handling`],[`Limits collection and retention of submitted content, validates supported file types and sizes, and tells users when data may go to external services.`,`Nililimitahan ang pagkolekta at pag-iimbak ng isinumiteng nilalaman, bineberipika ang suportadong uri at laki ng file, at ipinapaalam sa user kapag maaaring mapunta ang data sa panlabas na serbisyo.`,`Nililimitahan ang collection at retention ng submitted content, vini-validate ang supported file types at sizes, at sinasabihan ang users kapag maaaring mapunta ang data sa external services.`],'safe',[`Private by design`,`Pribado mula sa disenyo`,`Private by design`]],
  ['📊',[`Performance and usability evaluation`,`Ebalwasyon ng performance at usability`,`Performance at usability evaluation`],[`Tests offline and online functionality, response time, file handling, detection behavior, and how well users understand the explanations and guidance.`,`Sinusubok ang paggana offline at online, bilis ng tugon, paghawak ng file, takbo ng pagtukoy, at kung gaano kahusay naiintindihan ng mga user ang mga paliwanag at gabay.`,`Tine-test ang offline at online functionality, response time, file handling, detection behavior, at kung gaano naiintindihan ng users ang explanations at guidance.`],'happy',[`Proven with users`,`Napatunayan sa mga user`,`Proven with users`]]
 ];
+feats.push(['🌐',[`Language switching`,`Pagpapalit ng wika`,`Language switching`],[`Switch between English, Filipino, and Taglish for the interface, explanations, and Surfy guidance.`,`Magpalit sa English, Filipino, at Taglish para sa interface, mga paliwanag, at gabay ni Surfy.`,`Pumili ng English, Filipino, o Taglish para sa interface, explanations, at Surfy guidance.`],'info',[`Your language`,`Iyong wika`,`Your language`]]);
 const tabs=$('#featTabs');let featI=0;
 function renderFeats(){
   tabs.innerHTML=feats.map((f,i)=>`<button role="tab" aria-selected="${i===featI}"><span class="ic" aria-hidden="true">${f[0]}</span><span>${L(f[1])}</span></button>`).join('');
@@ -1198,7 +1283,7 @@ function initReveal(){
   if(reduce||!('IntersectionObserver' in window))return;
   const inSlide=el=>el.closest('section,footer');
   const text=new Set([...staticEls.filter(inSlide),...$$('.stat .n,#modeNote,#typeNote,#moodNote')]);
-  const boxSel='.stat,.gap-card,.gap-ans,.t-card,.next,.u-card,.step,.report,.phone-shell,.feat-tabs,.feat-pane,.finder,.sl,.coach,.chat,.video-box,.switch,.mini-switch,.types,.filters,.moods,.checks,.objs,.sol-art,.problem-grid>img,.stage,.video-bar,.pitch-head img,.proposal-card';
+  const boxSel='.stat,.gap-card,.gap-ans,.t-card,.next,.u-card,.step,.report,.phone-shell,.feat-tabs,.feat-pane,.finder,.sl,.coach,.chat,.video-box,.switch,.mini-switch,.types,.filters,.moods,.checks,.objs,.sol-art,.problem-grid>img,.stage,.video-bar,.pitch-head img,.proposal-card,.stack-card,.feas-grid .gap-card';
   const boxes=new Set($$(boxSel).filter(el=>inSlide(el)));
   const all=[...text].filter(el=>!boxes.has(el)).map(el=>[el,'tx']).concat([...boxes].map(el=>[el,'tb']));
   all.forEach(([el,c])=>{el.style.setProperty('--o',getComputedStyle(el).opacity);el.classList.add(c)});
@@ -1207,13 +1292,23 @@ function initReveal(){
       .sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top||a.boundingClientRect.left-b.boundingClientRect.left)
       .forEach((e,i)=>{
         const el=e.target;rio.unobserve(el);
-        el.style.setProperty('--td',Math.min(i*.07,.7)+'s');
+        el.style.setProperty('--td',Math.min(i*.07,.9)+'s');
         el.classList.add('in');
         el.addEventListener('animationend',ev=>{if(ev.target===el){el.classList.remove('tx','tb','in');el.style.removeProperty('--td')}});
       });
   },{threshold:.1,rootMargin:'0px 0px -4% 0px'});
   all.forEach(([el])=>rio.observe(el));
 }
+
+
+
+/* Simple category navigation; native details remain available without JavaScript. */
+$$('[data-tech-filter]').forEach(button=>button.addEventListener('click',()=>{
+ const group=button.dataset.techFilter;
+ $$('[data-tech-filter]').forEach(b=>b.setAttribute('aria-pressed',b===button));
+ $$('[data-tech-group]').forEach(g=>g.hidden=group!=='all'&&g.dataset.techGroup!==group);
+ $('.tech-groups').classList.toggle('is-filtered',group!=='all');
+}));
 
 /* ---------- start ---------- */
 (function(){
